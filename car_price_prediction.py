@@ -8,6 +8,9 @@ import numpy as np
 model_path = 'best_xgboost_model.pkl'
 model = joblib.load(model_path)
 
+# Extract original feature names from the model
+original_feature_names = model.get_booster().feature_names
+
 # Load the data to get dropdown options
 file_path = 'ML.csv'
 data = pd.read_csv(file_path)
@@ -32,6 +35,9 @@ version = st.selectbox("Version:", versions)
 # Prepare data for prediction as DataFrame
 input_data = pd.DataFrame([[2023 - age, mileage, make, car_model, version, list_price]],
                           columns=["Año", "Kilometraje", "Marca.1.Índice", "Modelo.1.Índice", "Version.1.Índice", "Precios Lista.Precio de Lista"]).astype(float)
+
+# Align input_data columns with original feature names
+input_data.columns = original_feature_names
 
 # Predict price
 if st.button("Predict Price"):
