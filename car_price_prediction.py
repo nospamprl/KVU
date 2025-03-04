@@ -26,11 +26,11 @@ age = st.number_input("Car Age (Years):", min_value=0, max_value=30, value=5)
 mileage = st.number_input("Mileage (KM):", min_value=0, max_value=500000, value=50000)
 list_price = st.number_input("List Price:", min_value=0, max_value=2000000, value=500000)
 make = st.selectbox("Make:", makes)
-model = st.selectbox("Model:", models)
+car_model = st.selectbox("Model:", models)
 version = st.selectbox("Version:", versions)
 
 # Prepare data for prediction as DataFrame
-input_data = pd.DataFrame([[2023 - age, mileage, make, model, version, list_price]],
+input_data = pd.DataFrame([[2023 - age, mileage, make, car_model, version, list_price]],
                           columns=["Año", "Kilometraje", "Marca.1.Índice", "Modelo.1.Índice", "Version.1.Índice", "Precios Lista.Precio de Lista"]).astype(float)
 
 # Predict price
