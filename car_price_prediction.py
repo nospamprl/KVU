@@ -29,8 +29,9 @@ make = st.selectbox("Make:", makes)
 model = st.selectbox("Model:", models)
 version = st.selectbox("Version:", versions)
 
-# Prepare data for prediction
-input_data = np.array([[2023 - age, mileage, make, model, version, list_price]])
+# Prepare data for prediction as DataFrame
+input_data = pd.DataFrame([[2023 - age, mileage, make, model, version, list_price]],
+                          columns=["Año", "Kilometraje", "Marca.1.Índice", "Modelo.1.Índice", "Version.1.Índice", "Precios Lista.Precio de Lista"]).astype(float)
 
 # Predict price
 if st.button("Predict Price"):
