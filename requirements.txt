@@ -2,7 +2,7 @@ Flask
 pandas
 numpy
 joblib
-xgboost==1.6.1  # Ensure compatibility
+xgboost==2.1.4  # Ensure compatibility
 openpyxl
 gunicorn
 
