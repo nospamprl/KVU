@@ -5,6 +5,11 @@ import numpy as np
 import os
 from flask import Flask, request, jsonify
 import xgboost as xgb
+from flask_cors import CORS
+
+# Enable CORS for all routes
+CORS(app, resources={r"/*": {"origins": ["https://advantcapital.com.mx"]}})
+
 
 app = Flask(__name__)
 
