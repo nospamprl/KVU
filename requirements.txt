@@ -1,5 +1,8 @@
-streamlit
+Flask
 pandas
 numpy
 joblib
-xgboost
+xgboost==1.6.1  # Ensure compatibility
+openpyxl
+gunicorn
+
