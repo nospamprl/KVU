@@ -7,11 +7,11 @@ from flask import Flask, request, jsonify
 import xgboost as xgb
 from flask_cors import CORS
 
-# Enable CORS for all routes
-CORS(app, resources={r"/*": {"origins": ["https://advantcapital.com.mx"]}})
-
 
 app = Flask(__name__)
+
+# Enable CORS for all routes
+CORS(app, resources={r"/*": {"origins": ["https://advantcapital.com.mx"]}})
 
 # Define absolute paths for files
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
