@@ -5,4 +5,6 @@ joblib
 xgboost==2.1.4  # Ensure compatibility
 openpyxl
 gunicorn
+Flask-Cors
+
 
