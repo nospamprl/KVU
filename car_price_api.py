@@ -6,6 +6,7 @@ import os
 from flask import Flask, request, jsonify
 import xgboost as xgb
 from flask_cors import CORS
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -42,7 +43,8 @@ def predict():
         return jsonify({'error': 'Invalid selection'}), 400
 
     # Prepare data for prediction
-    age = 2023 - int(data['Year'])
+    #age = 2025 - int(data['Year']) #  **********************************************************  Cambiar cada año calendario
+    age = datetime.now().year - int(data['Year'])
     mileage = float(data['Mileage'])
     list_price = float(data['ListPrice'])
 
