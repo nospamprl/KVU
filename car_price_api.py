@@ -56,23 +56,24 @@ def predict():
 @app.route('/get-options', methods=['GET'])
 def get_options():
     try:
-        make_df = pd.read_excel(mapping_file, sheet_name='Marca')
-        model_df = pd.read_excel(mapping_file, sheet_name='Modelo')
-        version_df = pd.read_excel(mapping_file, sheet_name='Version')
+        # Load the Catalogo sheet
+        catalog_df = pd.read_excel(mapping_file, sheet_name='Catalogo')
 
-        makes = make_df.iloc[:, 0].dropna().unique().tolist()
-        models = model_df.iloc[:, 0].dropna().unique().tolist()
-        versions = version_df.iloc[:, 0].dropna().unique().tolist()
+        # Extract makes, models, and versions
+        makes = catalog_df['Marca'].dropna().unique().tolist()
+
+        # Build model and version relationships
+        model_map = catalog_df[['Marca', 'Modelo']].drop_duplicates().to_dict('records')
+        version_map = catalog_df[['Modelo', 'Version']].drop_duplicates().to_dict('records')
 
         return jsonify({
             'makes': makes,
-            'models': models,
-            'versions': versions
+            'models': model_map,
+            'versions': version_map
         })
     except Exception as e:
-        print("Error in /get-options:", str(e))
+        print("Error fetching options:", str(e))
         return jsonify({'error': 'Failed to load options'}), 500
-
 
 # Run the Flask app
 if __name__ == '__main__':
