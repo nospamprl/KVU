@@ -46,7 +46,8 @@ def predict():
 
     # Make prediction
     predicted_price = model.predict(input_data)[0]
-    return jsonify({'predicted_price': round(predicted_price, 2)})
+    return jsonify({'predicted_price': float(round(predicted_price, 2))})
+
 
 # Run the Flask app
 if __name__ == '__main__':
