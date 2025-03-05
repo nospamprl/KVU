@@ -20,8 +20,8 @@ model = joblib.load(model_path)
 original_feature_names = model.get_booster().feature_names
 
 # Load mappings from new sheet names
-make_mapping = pd.read_excel(mapping_file, sheet_name='Marca').set_index('Make')['Marca.1.Índice'].to_dict()
-model_mapping = pd.read_excel(mapping_file, sheet_name='Modelo').set_index('Model')['Modelo.1.Índice'].to_dict()
+make_mapping = pd.read_excel(mapping_file, sheet_name='Marca').set_index('Marca')['Marca.1.Índice'].to_dict()
+model_mapping = pd.read_excel(mapping_file, sheet_name='Modelo').set_index('Modelo')['Modelo.1.Índice'].to_dict()
 version_mapping = pd.read_excel(mapping_file, sheet_name='Version').set_index('Version')['Version.1.Índice'].to_dict()
 
 @app.route('/predict', methods=['POST'])
