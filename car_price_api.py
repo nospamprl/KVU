@@ -48,6 +48,26 @@ def predict():
     predicted_price = model.predict(input_data)[0]
     return jsonify({'predicted_price': float(round(predicted_price, 2))})
 
+@app.route('/get-options', methods=['GET'])
+def get_options():
+    try:
+        make_df = pd.read_excel(mapping_file, sheet_name='Marca')
+        model_df = pd.read_excel(mapping_file, sheet_name='Modelo')
+        version_df = pd.read_excel(mapping_file, sheet_name='Version')
+
+        makes = make_df.iloc[:, 0].dropna().unique().tolist()
+        models = model_df.iloc[:, 0].dropna().unique().tolist()
+        versions = version_df.iloc[:, 0].dropna().unique().tolist()
+
+        return jsonify({
+            'makes': makes,
+            'models': models,
+            'versions': versions
+        })
+    except Exception as e:
+        print("Error in /get-options:", str(e))
+        return jsonify({'error': 'Failed to load options'}), 500
+
 
 # Run the Flask app
 if __name__ == '__main__':
